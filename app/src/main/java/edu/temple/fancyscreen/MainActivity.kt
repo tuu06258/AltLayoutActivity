@@ -1,17 +1,18 @@
 package edu.temple.fancyscreen
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 class MainActivity : AppCompatActivity() {
+    // Test
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,40 +32,48 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.supervisor).text = "Gail Davers"
 
-        with (findViewById<RecyclerView>(R.id.directReportsRecyclerView)) {
-            adapter = RecyclerViewAdapter(
-                arrayOf(
-                    "Kate Sacloff",
-                    "Andrew Klein",
-                    "Maria Ortega",
-                    "Brent Stevenson",
-                    "Daniel Cho",
-                    "Jorge Gomez"
+        with(findViewById<RecyclerView>(R.id.directReportsRecyclerView)) {
+            adapter =
+                RecyclerViewAdapter(
+                    arrayOf(
+                        "Kate Sacloff",
+                        "Andrew Klein",
+                        "Maria Ortega",
+                        "Brent Stevenson",
+                        "Daniel Cho",
+                        "Jorge Gomez",
+                    ),
                 )
-            )
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
     }
 }
 
-class RecyclerViewAdapter (private val staffList: Array<String>) : RecyclerView.Adapter<RecyclerViewAdapter.StaffListViewHolder>() {
-    class StaffListViewHolder(val textView: TextView) : ViewHolder(textView) {
+class RecyclerViewAdapter(
+    private val staffList: Array<String>,
+) : RecyclerView.Adapter<RecyclerViewAdapter.StaffListViewHolder>() {
+    class StaffListViewHolder(
+        val textView: TextView,
+    ) : ViewHolder(textView)
 
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StaffListViewHolder {
-        return StaffListViewHolder(
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): StaffListViewHolder =
+        StaffListViewHolder(
             TextView(parent.context).apply {
                 textSize = 22f
                 setTextColor(Color.BLUE)
-                setPadding(50,8,0,8)
-            }
+                setPadding(50, 8, 0, 8)
+            },
         )
-    }
 
     override fun getItemCount() = staffList.size
 
-    override fun onBindViewHolder(holder: StaffListViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: StaffListViewHolder,
+        position: Int,
+    ) {
         holder.textView.text = staffList[position]
     }
 }
